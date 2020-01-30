@@ -26,7 +26,7 @@ class App extends React.Component {
       },
       placeName: ''
     }
-    this.apiToken = 'xxxxx'
+    this.apiToken = '6f8fd58a3ea6d25ae6f70c3d003d1e66'
   }
 
   async getData (id) {
@@ -43,9 +43,9 @@ class App extends React.Component {
     const options = { method: 'get' }
     const uri =
       'http://api.openweathermap.org/data/2.5/weather?lang=ja&units=metric'
-    const params = `&appid=${this.OpenWeatherMapKey}&id=${id}`
+    const params = `&appid=${this.apiToken}&id=${id}`
     const data = await getJSON(uri + params, options)
-    this.setState({ data: data })
+    this.setState({ item: data })
   }
 
   handleUpdate (event) {
@@ -63,7 +63,7 @@ class App extends React.Component {
       { name: '沖縄', id: 1894616 }
     ] })
   }
-  
+
   render () {
     return (
       <Card>
@@ -100,7 +100,7 @@ const SelectorView = props => (
 )
 
 const ListView = props => {
-  const { weather, icon, temperature } = props.info
+  const { weather, icon, temperature } = props.item
   const formatTemperature = temperature ? `${temperature}℃` : ''
   const path = `http://openweathermap.org/img/wn/${icon}.png`
   const image = icon ? <Avatar src={path} alt={weather} /> : <WbSunny />
